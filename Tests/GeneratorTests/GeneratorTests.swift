@@ -15,8 +15,10 @@ final class GeneratorTests: XCTestCase {
 	
 	func testGenerator() throws {
 		let generator = Generator(corpus: corpus)
-		let constraint = Constraint(word: .noun, category: "body part")
-		let foo = try generator.generate(with: constraint)
+		let constraint = Constraint(word: .adjective, category: "body part")
+		let strings = try generator.generate(with: constraint)
+		print(strings)
+		print(strings.count)
 	}
 	
 	static var allTests = [

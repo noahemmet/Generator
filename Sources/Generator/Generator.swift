@@ -5,7 +5,8 @@ public struct Generator {
 		self.corpus = corpus
 	}
 	
-	public func generate(with constraint: Constraint) throws {
+	public func generate(with constraint: Constraint) throws -> [String] {
 		let filtered = try corpus.filter(with: constraint)
+		return filtered
 	}
 }
