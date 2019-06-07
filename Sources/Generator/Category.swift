@@ -1,8 +1,7 @@
-//
-//  File.swift
-//  
-//
-//  Created by Noah Emmet on 6/7/19.
-//
-
-import Foundation
+public struct Category: ExpressibleByStringLiteral {
+	public var name: String
+	
+	public init(stringLiteral value: String) {
+		name = value
+	}
+}
