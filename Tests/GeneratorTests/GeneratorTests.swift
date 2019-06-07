@@ -17,6 +17,11 @@ final class GeneratorTests: XCTestCase {
 		try corpus.validate()
 	}
 	
+	func testBadCorpus() throws {
+		let badCorpus = Corpus(categories: ["category"], traits: [Trait(categories: ["nonmatching category"], tags: [])])
+		XCTAssertThrowsError(try badCorpus.validate())
+	}
+	
 	func testGenerator() throws {
 		let generator = Generator(corpus: corpus)
 		let constraint = Constraint(word: .adjective, category: "body part")

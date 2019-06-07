@@ -14,10 +14,11 @@ public struct Corpus {
 	}
 	
 	public func validate() throws {
+		// Validate that referenced categories in traits match the corpus' categories.
 		let traitCategories = traits.flatMap { $0.categories }
 		let corpusCategoryNames = categories.map { $0.name }
 		guard corpusCategoryNames.containsAll(traitCategories) else {
-			throw CorpusError.invalid("categories in constraint are not in corpus categories")
+			throw CorpusError.invalid("categories referenced in traits are not in corpus categories")
 		}
 	}
 	
