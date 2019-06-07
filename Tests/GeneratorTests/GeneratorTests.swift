@@ -5,13 +5,17 @@ final class GeneratorTests: XCTestCase {
 	
 	public let corpus = Corpus(
 		categories: [
-			"body part"
+			"body part", "color"
 		],
 		traits: [
 			Trait(categories: ["body part"], words: [.n("feather")], tags: "lightweight", "flying", "sky"),
 			Trait(categories: ["color"], adjectives: ["blue", "orange"], tags: []),
 		]
 	)
+	
+	func testCorpus() throws {
+		try corpus.validate()
+	}
 	
 	func testGenerator() throws {
 		let generator = Generator(corpus: corpus)

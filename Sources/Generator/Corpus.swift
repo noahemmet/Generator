@@ -1,5 +1,9 @@
 import Common
 
+public enum CorpusError: Error {
+	case invalid(String)
+}
+
 public struct Corpus {
 	public var categories: [Category]
 	public var traits: [Trait]
@@ -7,6 +11,14 @@ public struct Corpus {
 	public init(categories: [Category], traits: [Trait]) {
 		self.categories = categories
 		self.traits = traits
+	}
+	
+	public func validate() throws {
+		let traitCategories = traits.flatMap { $0.categories }
+		let corpusCategoryNames = categories.map { $0.name }
+		guard corpusCategoryNames.containsAll(traitCategories) else {
+			throw CorpusError.invalid("categories in constraint are not in corpus categories")
+		}
 	}
 	
 	public func filter(with constraint: Constraint) throws -> [String] {
