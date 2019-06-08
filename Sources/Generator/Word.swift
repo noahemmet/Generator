@@ -1,13 +1,21 @@
 public enum Word: Hashable {
-	case noun(String)
+	case noun(Noun)
 	case adjective(Adjective)
 	
-	public static func n(_ noun: String) -> Word {
+	public static func n(_ noun: Noun) -> Word {
 		return .noun(noun)
+	}
+	
+	public static func n(_ noun: String) -> Word {
+		return .noun(.init(noun))
 	}
 	
 	public static func adj(_ adjective: Adjective) -> Word {
 		return .adjective(adjective)
+	}
+	
+	public static func adj(_ adjective: String) -> Word {
+		return .adjective(.init(adjective))
 	}
 	
 	public var kind: Kind {
@@ -20,7 +28,7 @@ public enum Word: Hashable {
 	public var text: String {
 		switch self {
 		case .adjective(let adjective): return adjective.text
-		case .noun(let noun): return noun
+		case .noun(let noun): return noun.text
 		}
 	}
 }
