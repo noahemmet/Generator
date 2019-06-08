@@ -9,7 +9,7 @@ public struct Trait: Hashable {
 	
 	public init(nouns: [String] = [], adjectives: [String] = [], tags: [Tag]) {
 		let nounWords: [Word] = nouns.map { .noun($0) }
-		let adjectiveWords: [Word] = adjectives.map { .adjective($0) }
+		let adjectiveWords: [Word] = adjectives.map { .adjective(.init($0)) }
 		self.words = nounWords + adjectiveWords
 		self.tags = tags
 	}

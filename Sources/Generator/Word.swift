@@ -1,12 +1,12 @@
 public enum Word: Hashable {
 	case noun(String)
-	case adjective(String)
+	case adjective(Adjective)
 	
 	public static func n(_ noun: String) -> Word {
 		return .noun(noun)
 	}
 	
-	public static func adj(_ adjective: String) -> Word {
+	public static func adj(_ adjective: Adjective) -> Word {
 		return .adjective(adjective)
 	}
 	
@@ -19,7 +19,7 @@ public enum Word: Hashable {
 	
 	public var text: String {
 		switch self {
-		case .adjective(let adjective): return adjective
+		case .adjective(let adjective): return adjective.text
 		case .noun(let noun): return noun
 		}
 	}
