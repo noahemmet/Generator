@@ -6,15 +6,14 @@ public let animalTraits: Set<Trait> = [
 	
 	"n:horn, adj:horned, adj:horney, #body part, #spikey, #defensive",
 	
-	
 	"adj:slippery, #fish",
 	
-	Trait(words: [.n("fish"), .adj("fishy"), .adj("scaly")],
-		  tags: "fishy", "swims", "scaly", "slippery"),
+	"n:fish, n:trout, n:salmon, n:tuna, adj:fishy, adj:scaly, #sea creature, #scaly, #slippery",
 	
 	Trait(adjectives: ["blue", "orange"],
 		  tags: ["color"]),
-]
+	]
+	.add(tags: "#animal")
 
 public let instruments: Set<Trait> = [
 	"n:horn, #loud",

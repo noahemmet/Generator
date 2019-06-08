@@ -5,7 +5,7 @@ final class GeneratorTests: XCTestCase {
 	
 	public let corpus = Corpus(
 		traits:
-			animalTraits
+			animalTraits, instruments
 	)
 	
 	func testCorpus() throws {
@@ -19,7 +19,7 @@ final class GeneratorTests: XCTestCase {
 	
 	func testGenerator() throws {
 		var generator = Generator(corpus: corpus)
-		let constraint = Constraint(.adjective(.attributive), "body part")
+		let constraint: Constraint = "adj: #body part"
 		let strings = try generator.generate(with: constraint)
 		print(strings)
 		print(strings.count)

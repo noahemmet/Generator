@@ -11,6 +11,10 @@ public struct Corpus {
 		self.traits = traits
 	}
 	
+	public init(traits: Set<Trait>...) {
+		self.traits = Set(traits.flatMap { $0 })
+	}
+	
 	public func validate() throws {
 		// Validate that referenced categories in traits match the corpus' categories.
 //		let traitCategories = traits.flatMap { $0.categories }
@@ -24,7 +28,7 @@ public struct Corpus {
 		
 		// Filter traits by tag
 		let filteredTraitsByTag: Set<Trait> = traits.filter { trait in
-			trait.tags.map { $0.name }.containsAll(constraint.tags)
+			trait.tags.containsAll(constraint.tags)
 		}
 		// Filter by wordKind
 		let filteredWords = filteredTraitsByTag.flatMap { $0.words.filter { $0.kind == constraint.wordKind }}
