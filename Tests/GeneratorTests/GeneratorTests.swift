@@ -5,12 +5,22 @@ final class GeneratorTests: XCTestCase {
 	
 	public let corpus = Corpus(
 		categories: [
-			"body part", "color"
+			"body part", "color", "bird", "fish", "swims"
 		],
 		traits: [
-			Trait(categories: ["body part"], words: [.n("feather")], tags: "lightweight", "flying", "sky"),
-			Trait(categories: ["color"], adjectives: ["blue", "orange"], tags: []),
+			Trait(words: [.n("feather"), .adj("feathered")],
+				  categories: ["body part", "bird"],
+				  tags: "lightweight", "flying", "sky"),
+			
+			Trait(words: [.n("fish"), .adj("fishy"), .adj("scaly")],
+				  categories: ["fish"],
+				  tags: "swims", "scaly", "slippery"),
+
+			Trait(adjectives: ["blue", "orange"],
+				  categories: ["color"],
+				  tags: []),
 		]
+		// should categories just be tags? Are categories just collections of tags?
 	)
 	
 	func testCorpus() throws {
