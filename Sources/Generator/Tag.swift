@@ -23,3 +23,9 @@ public struct Tag: Hashable, ExpressibleByStringLiteral {
 		self.init(value)
 	}
 }
+
+//extension Array: ExpressibleByStringLiteral where Element: ExpressibleByStringLiteral {
+//	public init(stringLiteral value: String) {
+//		fatalError()
+//	}
+//}
