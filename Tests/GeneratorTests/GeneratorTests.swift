@@ -5,11 +5,13 @@ final class GeneratorTests: XCTestCase {
 	
 	public let corpus = Corpus(
 		traits: [
-			Trait(words: [.n("feather"), .adj("feathered")],
-				  tags: "body part", "bird", "lightweight", "flying", "sky"),
+			"n:feather, adj:feathered, adj:feathery, #body part, #bird, #lightweight, #flying, #sky",
 			
-			Trait(words: [.n("horn"), .adj("horned")],
-				  tags: "body part", "spikey", "defensive"),
+			"n:horn, adj:horned, adj:horney, #body part, #spikey, #defensive",
+			
+			"n:horn, #loud, #instrument",
+			
+			"adj:slippery, #fish",
 			
 			Trait(words: [.n("fish"), .adj("fishy"), .adj("scaly")],
 				  tags: "fishy", "swims", "scaly", "slippery"),
@@ -29,8 +31,8 @@ final class GeneratorTests: XCTestCase {
 	}
 	
 	func testGenerator() throws {
-		let generator = Generator(corpus: corpus)
-		let constraint = Constraint(word: .adjective, tags: "body part")
+		var generator = Generator(corpus: corpus)
+		let constraint = Constraint(.adjective(.attributive), "body part")
 		let strings = try generator.generate(with: constraint)
 		print(strings)
 		print(strings.count)

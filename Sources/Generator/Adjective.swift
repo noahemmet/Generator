@@ -10,6 +10,30 @@ public enum Adjective: Hashable {
 		case .presentParticipal(let text): return text
 		}
 	}
+	
+	public var kind: Kind {
+		switch self {
+		case .attributive: return .attributive
+		case .pastParticipal: return .pastParticipal
+		case .presentParticipal: return .presentParticipal
+		}
+	}
+}
+
+extension Adjective {
+	public enum Kind: Hashable {
+//		case any
+		case attributive
+		case pastParticipal
+		case presentParticipal
+		
+//		public var isAny: Bool {
+//			if case .any = self {
+//				return true
+//			}
+//			return false
+//		}
+	}
 }
 
 extension Adjective: ExpressibleByStringLiteral {

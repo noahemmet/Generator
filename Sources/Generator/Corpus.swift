@@ -27,7 +27,7 @@ public struct Corpus {
 			trait.tags.map { $0.name }.containsAll(constraint.tags)
 		}
 		// Filter by wordKind
-		let filteredWords = filteredTraitsByTag.flatMap { $0.words.filter { $0.kind == constraint.word }}
+		let filteredWords = filteredTraitsByTag.flatMap { $0.words.filter { $0.kind == constraint.wordKind }}
 		let texts = filteredWords.map { $0.text }
 		return Set(texts)
 	}

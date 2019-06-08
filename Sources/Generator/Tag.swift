@@ -3,9 +3,10 @@ public struct Tag: Hashable, ExpressibleByStringLiteral {
 	public let name: String
 	public let weight: Weight
 	
-	public init(stringLiteral value: String) {
-		let positiveStrings = value.split(separator: "+")
-		let negativeStrings = value.split(separator: "-")
+	public init(_ string: String) {
+		let string = string.droppingPrefix("#")
+		let positiveStrings = string.split(separator: "+")
+		let negativeStrings = string.split(separator: "-")
 		if positiveStrings.count == 2 {
 			self.name = String(positiveStrings[0])
 			self.weight = Int(positiveStrings[1])!
@@ -13,8 +14,12 @@ public struct Tag: Hashable, ExpressibleByStringLiteral {
 			self.name = String(negativeStrings[0])
 			self.weight = -Int(negativeStrings[1])!
 		} else {
-			self.name = value
+			self.name = string
 			self.weight = Tag.defaultWeight
 		}
+	}
+	
+	public init(stringLiteral value: String) {
+		self.init(value)
 	}
 }

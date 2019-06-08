@@ -20,7 +20,7 @@ public enum Word: Hashable {
 	
 	public var kind: Kind {
 		switch self {
-		case .adjective: return .adjective
+		case .adjective(let adj): return .adjective(adj.kind)
 		case .noun: return .noun
 		}
 	}
@@ -34,8 +34,24 @@ public enum Word: Hashable {
 }
 
 extension Word {
-	public enum Kind {
+	public enum Kind: Hashable {
 		case noun
-		case adjective
+		case adjective(Adjective.Kind)
+		
+//		public var isAny: Bool {
+//			switch self {
+//			case .adjective(let adj):
+//				return adj.isAny
+//			case .noun:
+//				return false
+//			}
+//		}
+//		
+//		public func matches(_ otherKind: Kind) -> Bool {
+//			if otherKind.isAny {
+//				return true
+//			}
+//			return otherKind == self
+//		}
 	}
 }
