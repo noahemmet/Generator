@@ -5,10 +5,10 @@ public enum CorpusError: Error {
 }
 
 public struct Corpus {
-	public var categories: [Category]
-	public var traits: [Trait]
+	public var categories: Set<Category>
+	public var traits: Set<Trait>
 
-	public init(categories: [Category], traits: [Trait]) {
+	public init(categories: Set<Category>, traits: Set<Trait>) {
 		self.categories = categories
 		self.traits = traits
 	}
@@ -22,9 +22,9 @@ public struct Corpus {
 		}
 	}
 	
-	public func filter(with constraint: Constraint) throws -> [String] {
+	public func filter(with constraint: Constraint) throws -> Set<String> {
 		// Filter by category
-		let filteredCategories: [Category]
+		let filteredCategories: Set<Category>
 		if let categoryName = constraint.category {
 			filteredCategories = categories.filter { $0.name == categoryName }
 		} else {
@@ -32,7 +32,7 @@ public struct Corpus {
 		}
 		
 		// Filter traits by category
-		let filteredTraitsByCategory: [Trait]
+		let filteredTraitsByCategory: Set<Trait>
 		if !filteredCategories.isEmpty {
 			filteredTraitsByCategory = traits.filter { trait in
 				trait.categories.contains(constraint.category)
@@ -42,12 +42,12 @@ public struct Corpus {
 		}
 		
 		// Filter traits by tag
-		let filteredTraitsByTag: [Trait] = filteredTraitsByCategory.filter { trait in
+		let filteredTraitsByTag: Set<Trait> = filteredTraitsByCategory.filter { trait in
 			trait.tags.map { $0.name }.containsAll(constraint.tags)
 		}
 		// Filter by wordKind
 		let filteredWords = filteredTraitsByTag.flatMap { $0.words.filter { $0.kind == constraint.word }}
 		let texts = filteredWords.map { $0.text }
-		return texts
+		return Set(texts)
 	}
 }

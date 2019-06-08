@@ -12,6 +12,10 @@ final class GeneratorTests: XCTestCase {
 				  categories: ["body part", "bird"],
 				  tags: "lightweight", "flying", "sky"),
 			
+			Trait(words: [.n("horn"), .adj("horned")],
+				  categories: ["body part", "bird", "fish"],
+				  tags: "spikey", "defensive"),
+			
 			Trait(words: [.n("fish"), .adj("fishy"), .adj("scaly")],
 				  categories: ["fish"],
 				  tags: "swims", "scaly", "slippery"),
