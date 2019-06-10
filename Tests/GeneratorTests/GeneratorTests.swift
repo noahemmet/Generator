@@ -40,15 +40,21 @@ final class GeneratorTests: XCTestCase {
 		
 		let entityGenerator = EntityGenerator<MyEntity>(corpus: corpus)
 		let entityGrammar: Grammar = "\(adj: "#body part")) \(n: "#sea creature")"
-		let entity = try entityGenerator.generate(with: entityGrammar) { (name, tags) -> MyEntity in
+		let entity1 = try entityGenerator.generate(with: entityGrammar) { (name, tags) -> MyEntity in
 			return .init(name: name, tags: tags)
 		}
-		print(entity)
+		print(entity1)
+		let entity2 = try entityGenerator.generate(with: entityGrammar) { (name, tags) -> MyEntity in
+			return .init(name: name, tags: tags)
+		}
+		print(entity2)
 		
 		
-		let paragraphGenerator = ParagraphGenerator(entities: [entity])
-		let paragraphGrammar: Grammar = "
-		let paragraph = paragraphGenerator.generate(on: <#T##Grammar#>)
+		let paragraphGenerator = ParagraphGenerator(entities: [entity1, entity2])
+		let paragraphGrammar: Grammar = "The \(e: "0") sits in the corner, next to the \(e: "1")."
+		let paragraph = try! paragraphGenerator.generate(on: paragraphGrammar)
+		print(paragraph)
+		print("")
 	}
 	
 	
