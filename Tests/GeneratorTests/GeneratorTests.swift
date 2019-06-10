@@ -24,7 +24,6 @@ final class GeneratorTests: XCTestCase {
 	
 	
 	func testSceneGenerator() throws {
-		
 		var filter = Filter(corpus: corpus)
 		let constraint: Constraint = "n: #entity"
 		let strings = try! filter.filter(with: constraint)
@@ -40,11 +39,16 @@ final class GeneratorTests: XCTestCase {
 		}
 		
 		let entityGenerator = EntityGenerator<MyEntity>(corpus: corpus)
-		let grammar: Grammar = "\(adj: "#body part")) \(n: "#sea creature")"
-		let entity = try entityGenerator.generate(with: grammar) { (name, tags) -> MyEntity in
+		let entityGrammar: Grammar = "\(adj: "#body part")) \(n: "#sea creature")"
+		let entity = try entityGenerator.generate(with: entityGrammar) { (name, tags) -> MyEntity in
 			return .init(name: name, tags: tags)
 		}
 		print(entity)
+		
+		
+		let paragraphGenerator = ParagraphGenerator(entities: [entity])
+		let paragraphGrammar: Grammar = "
+		let paragraph = paragraphGenerator.generate(on: <#T##Grammar#>)
 	}
 	
 	

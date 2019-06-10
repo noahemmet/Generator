@@ -15,7 +15,6 @@ public struct EntityGenerator<Entity: GeneratedEntity> {
 		let tags = try constraints.map { try filter.filter(with: $0) }
 		let name = tags.joined(separator: " ")
 		let entity = handle(name, tags.map { Tag($0) })
-		print(entity)
 		return entity
 	}
 }

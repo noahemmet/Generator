@@ -10,7 +10,7 @@ public struct Grammar {
 	public var allConstraints: [Constraint] {
 		let constraints: [Constraint] = self.segments.compactMap { segment in
 			switch segment {
-			case .text: return nil
+			case .text, .entity: return nil
 			case .constraint(let constraint): return constraint
 			}
 		}
@@ -48,6 +48,10 @@ extension Grammar: ExpressibleByStringInterpolation {
 		public mutating func appendInterpolation(n tagString: String) {
 			let constraint = Constraint(wordKind: .noun, tagString: tagString)
 			segments.append(.constraint(constraint))
+		}
+		
+		public mutating func appendInterpolation(e entityName: String) {
+			segments.append(.entity(entityName))
 		}
 	}
 }
