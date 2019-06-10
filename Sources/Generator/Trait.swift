@@ -1,3 +1,5 @@
+import Common
+
 public struct Trait: Hashable {
 	public var words: Set<Word>
 	public var tags: Set<Tag>

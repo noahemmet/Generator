@@ -4,17 +4,13 @@ import XCTest
 final class GeneratorTests: XCTestCase {
 	
 	public let corpus = Corpus(
-		traits:
-			animalTraits, instruments
+		categories: [
+			Vanilla.fauna
+			]
 	)
 	
 	func testCorpus() throws {
 		try corpus.validate()
-	}
-	
-	func testBadCorpus() throws {
-		let badCorpus = Corpus(traits: [Trait(tags: ["bad tag"])])
-//		XCTAssertThrowsError(try badCorpus.validate())
 	}
 	
 	func testGenerator() throws {

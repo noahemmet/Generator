@@ -5,14 +5,12 @@ public enum CorpusError: Error {
 }
 
 public struct Corpus {
+	public var categories: Set<Category>
 	public var traits: Set<Trait>
 
-	public init(traits: Set<Trait>) {
-		self.traits = traits
-	}
-	
-	public init(traits: Set<Trait>...) {
-		self.traits = Set(traits.flatMap { $0 })
+	public init(categories: Set<Category>) {
+		self.categories = categories
+		self.traits = Set(categories.flatMap { $0.traits })
 	}
 	
 	public func validate() throws {

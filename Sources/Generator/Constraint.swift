@@ -36,7 +36,7 @@ extension Constraint: ExpressibleByStringLiteral {
 		let tagStrings = tagString.split(separator: separator)
 			.map(String.init)
 			.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-			.map { $0.droppingPrefix(tagPrefix) }
+			.map { $0.droppingPrefix(tagPrefix) } 
 		
 		tags = tagStrings.map { Tag($0) }
 	}
