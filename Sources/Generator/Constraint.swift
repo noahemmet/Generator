@@ -17,10 +17,9 @@ extension Constraint: ExpressibleByStringLiteral {
 		let adjPast = "adj.ed:"
 		let adjPresent = "adj.ing:"
 		let noun = "n:"
-		let tagPrefix = "#"
-		
-		let separator: Character = ","
 		let tagString: String
+		let wordKind: Word.Kind
+		
 		if value.hasPrefix(adjPrefix) {
 			wordKind = .adjective(.attributive)
 			tagString = value.droppingPrefix(adjPrefix)
@@ -37,10 +36,20 @@ extension Constraint: ExpressibleByStringLiteral {
 			wordKind = .adjective(.attributive)
 			tagString = value
 		}
+		self.init(wordKind: wordKind, tagString: tagString)
+	}
+	
+	
+	public init(wordKind: Word.Kind, tagString: String) {
+		self.wordKind = wordKind
+		
+		let tagPrefix = "#"
+		let separator: Character = ","
+
 		let tagStrings = tagString.split(separator: separator)
 			.map(String.init)
 			.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-			.map { $0.droppingPrefix(tagPrefix) } 
+			.map { $0.droppingPrefix(tagPrefix) }
 		
 		tags = tagStrings.map { Tag($0) }
 	}

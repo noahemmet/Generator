@@ -14,23 +14,40 @@ final class GeneratorTests: XCTestCase {
 	}
 	
 	func testGenerator() throws {
-		var generator = Filter(corpus: corpus)
+		var filter = Filter(corpus: corpus)
 		let constraint: Constraint = "adj: #body part"
-		let strings = try generator.filter(with: constraint)
+		let strings = try filter.filter(with: constraint)
 		print(strings)
-		print(generator.corpus.tagsByFrequency)
+		print(filter.corpus.tagsByFrequency)
 		XCTAssertFalse(strings.isEmpty)
 	}
 	
 	
 	func testSceneGenerator() throws {
 		
-		var generator = Filter(corpus: corpus)
+		var filter = Filter(corpus: corpus)
 		let constraint: Constraint = "n: #entity"
-		let strings = try! generator.filter(with: constraint)
+		let strings = try! filter.filter(with: constraint)
 		print(strings)
 		XCTAssertFalse(strings.isEmpty)
 	}
+	
+	
+	func testEntityGenerator() throws {
+		struct MyEntity: GeneratedEntity {
+			var name: String
+			var tags: [Tag]
+		}
+		
+		let entityGenerator = EntityGenerator<MyEntity>(corpus: corpus)
+		let grammar: Grammar = "\(adj: "#body part")) \(n: "#sea creature")"
+		let entity = try entityGenerator.generate(with: grammar) { (name, tags) -> MyEntity in
+			return .init(name: name, tags: tags)
+		}
+		print(entity)
+	}
+	
+	
 	static var allTests = [
 		("testGenerator", testGenerator),
 	]
