@@ -43,15 +43,13 @@ final class GeneratorTests: XCTestCase {
 		let entity1 = try entityGenerator.generate(with: entityGrammar) { (name, tags) -> MyEntity in
 			return .init(name: name, tags: tags)
 		}
-		print(entity1)
 		let entity2 = try entityGenerator.generate(with: entityGrammar) { (name, tags) -> MyEntity in
 			return .init(name: name, tags: tags)
 		}
-		print(entity2)
 		
 		
 		let paragraphGenerator = ParagraphGenerator(entities: [entity1, entity2])
-		let paragraphGrammar: Grammar = "The \(e: "0") sits in the corner, next to the \(e: "1")."
+		let paragraphGrammar: Grammar = "The \(e: 0) sits in the corner, next to the \(e: "1")."
 		let paragraph = try! paragraphGenerator.generate(on: paragraphGrammar)
 		print(paragraph)
 		print("")

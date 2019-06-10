@@ -53,5 +53,9 @@ extension Grammar: ExpressibleByStringInterpolation {
 		public mutating func appendInterpolation(e entityName: String) {
 			segments.append(.entity(entityName))
 		}
+		
+		public mutating func appendInterpolation(e entityIndex: Int) {
+			segments.append(.entity("\(entityIndex)"))
+		}
 	}
 }

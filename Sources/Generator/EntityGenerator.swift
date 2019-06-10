@@ -8,11 +8,11 @@ public struct EntityGenerator<Entity: GeneratedEntity> {
 	}
 	
 	public typealias GenerationHandler = (String, [Tag]) -> Entity
-	public func generate(with grammar: Grammar, handle: GenerationHandler) throws -> Entity {
+	public func generate(with grammar: Grammar, unique: Bool = false, handle: GenerationHandler) throws -> Entity {
 		
 		var filter = Filter(corpus: corpus)
 		let constraints = grammar.allConstraints
-		let tags = try constraints.map { try filter.filter(with: $0) }
+		let tags = try constraints.map { try filter.filter(with: $0, unique: unique) }
 		let name = tags.joined(separator: " ")
 		let entity = handle(name, tags.map { Tag($0) })
 		return entity
