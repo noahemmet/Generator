@@ -9,7 +9,7 @@ extension Vanilla {
 		
 		"adj:horned, adj:horney, #body part, #spikey, #defensive",
 		
-		"n:fish, n:trout, n:salmon, n:tuna, adj:fishy, adj:scaly, #sea creature, #ocean, #slippery",
+		"n:fish, n:trout, n:salmon, n:tuna, adj:fishy, adj:scaly, #sea creature, #ocean, #slippery, #entity",
 		])
 	
 	public static let flora = Category("flora", traits: [

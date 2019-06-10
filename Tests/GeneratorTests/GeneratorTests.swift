@@ -22,6 +22,15 @@ final class GeneratorTests: XCTestCase {
 		XCTAssertFalse(strings.isEmpty)
 	}
 	
+	
+	func testSceneGenerator() throws {
+		
+		var generator = Generator(corpus: corpus)
+		let constraint: Constraint = "n: #entity"
+		let strings = try! generator.generate(with: constraint)
+		print(strings)
+		XCTAssertFalse(strings.isEmpty)
+	}
 	static var allTests = [
 		("testGenerator", testGenerator),
 	]

@@ -16,6 +16,7 @@ extension Constraint: ExpressibleByStringLiteral {
 		let adjPrefix = "adj:"
 		let adjPast = "adj.ed:"
 		let adjPresent = "adj.ing:"
+		let noun = "n:"
 		let tagPrefix = "#"
 		
 		let separator: Character = ","
@@ -29,6 +30,9 @@ extension Constraint: ExpressibleByStringLiteral {
 		} else if value.hasPrefix(adjPresent) {
 			wordKind = .adjective(.presentParticipal)
 			tagString = value.droppingPrefix(adjPresent)
+		} else if value.hasPrefix(noun) {
+			wordKind = .noun
+			tagString = value.droppingPrefix(noun)
 		} else {
 			wordKind = .adjective(.attributive)
 			tagString = value

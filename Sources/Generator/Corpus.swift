@@ -29,16 +29,16 @@ public struct Corpus {
 		return sorted
 	}
 	
-	public var tagsByFrequency: [(Int, String)] {
+	public var tagsByFrequency: [(count: Int, tag: String)] {
 		let tags = traits.flatMap { $0.tags }.map { $0.name }
 		var tagCountsByName: [String: Int] = [:]
 		for tag in tags {
 			tagCountsByName[tag, default: 0] += 1
 		}
-		let tagsByFrequency: [(Int, String)] = tagCountsByName.map { (arg) -> (Int, String) in
+		let tagsByFrequency: [(count: Int, tag: String)] = tagCountsByName.map { (arg) -> (Int, String) in
 			let (tag, count) = arg
 			return (count, tag)
-		}
+		}.sorted(by: { $0.count > $1.count })
 		return tagsByFrequency
 	}
 	
