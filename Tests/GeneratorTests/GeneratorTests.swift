@@ -14,9 +14,9 @@ final class GeneratorTests: XCTestCase {
 	}
 	
 	func testGenerator() throws {
-		var generator = Generator(corpus: corpus)
+		var generator = Filter(corpus: corpus)
 		let constraint: Constraint = "adj: #body part"
-		let strings = try generator.generate(with: constraint)
+		let strings = try generator.filter(with: constraint)
 		print(strings)
 		print(generator.corpus.tagsByFrequency)
 		XCTAssertFalse(strings.isEmpty)
@@ -25,9 +25,9 @@ final class GeneratorTests: XCTestCase {
 	
 	func testSceneGenerator() throws {
 		
-		var generator = Generator(corpus: corpus)
+		var generator = Filter(corpus: corpus)
 		let constraint: Constraint = "n: #entity"
-		let strings = try! generator.generate(with: constraint)
+		let strings = try! generator.filter(with: constraint)
 		print(strings)
 		XCTAssertFalse(strings.isEmpty)
 	}

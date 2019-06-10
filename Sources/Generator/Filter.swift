@@ -1,6 +1,6 @@
 import Common
 
-public struct Generator {
+public struct Filter {
 	public var corpus: Corpus
 	public private(set) var history: Set<String> = []
 	public var excluded: Set<String>
@@ -10,7 +10,7 @@ public struct Generator {
 		self.excluded = excluded
 	}
 	
-	public mutating func generate(with constraint: Constraint, unique: Bool = false) throws -> String {
+	public mutating func filter(with constraint: Constraint, unique: Bool = false) throws -> String {
 		let filtered = try corpus.filter(with: constraint)
 		var candidates = filtered.subtracting(excluded)
 		if unique {
