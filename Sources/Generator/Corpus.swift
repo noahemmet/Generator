@@ -22,6 +22,26 @@ public struct Corpus {
 //		}
 	}
 	
+	
+	public var allTags: [String] {
+		let tags = traits.flatMap { $0.tags }.map { $0.name }
+		let sorted = tags.sorted(by: <)
+		return sorted
+	}
+	
+	public var tagsByFrequency: [(Int, String)] {
+		let tags = traits.flatMap { $0.tags }.map { $0.name }
+		var tagCountsByName: [String: Int] = [:]
+		for tag in tags {
+			tagCountsByName[tag, default: 0] += 1
+		}
+		let tagsByFrequency: [(Int, String)] = tagCountsByName.map { (arg) -> (Int, String) in
+			let (tag, count) = arg
+			return (count, tag)
+		}
+		return tagsByFrequency
+	}
+	
 	public func filter(with constraint: Constraint) throws -> Set<String> {
 		
 		// Filter traits by tag

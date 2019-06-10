@@ -8,4 +8,5 @@ public struct Category: Hashable {
 		self.name = name
 		self.traits = traits
 	}
+	
 }
