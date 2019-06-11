@@ -48,13 +48,12 @@ final class GeneratorTests: XCTestCase {
 		}
 		let entities = [entity1, entity2]
 		
-		let paragraphGenerator = ParagraphGenerator(entities: entities)
-		let paragraphGrammar: Grammar = "The \(e: 0) sits in the corner, next to the \(e: "1")."
-		let paragraph = try! paragraphGenerator.generate(on: paragraphGrammar)
-		print(paragraph)
-		print("")
+		let grammars: [Grammar] = [
+			"There is a \(e: 0),",
+			"The \(e: 0) sits in the corner, next to the \(e: "1")."
+		]
 		
-		let sceneGenerator = SceneGenerator(corpus: corpus, entities: entities)
+		let sceneGenerator = SceneGenerator(grammars: grammars, entities: entities)
 		let intro = try sceneGenerator.generateIntro()
 		print(intro)
 		print("")

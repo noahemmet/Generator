@@ -1,10 +1,12 @@
 import Common
 
 public struct ParagraphGenerator {
+	public var grammars: [Grammar]
 	public let entities: [GeneratedEntity]
 	
 	// Eventually -> Prose
-	public func generate(on grammar: Grammar) throws -> String {
+	public mutating func generate(unique: Bool = false) throws -> String {
+		let grammar = try grammars.dropRandom().unwrap()
 		let sentences: [String] = try grammar.segments.map { segment in
 			switch segment {
 			case .entity(let entityKey):
