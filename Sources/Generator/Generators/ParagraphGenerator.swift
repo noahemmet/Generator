@@ -3,10 +3,19 @@ import Common
 public struct ParagraphGenerator {
 	public var grammars: [Grammar]
 	public let entities: [GeneratedEntity]
+	private var history: [Grammar] = []
+	
+	public init(grammars: [Grammar], entities: [GeneratedEntity]) {
+		self.grammars = grammars
+		self.entities = entities
+	}
 	
 	// Eventually -> Prose
 	public mutating func generate(unique: Bool = false) throws -> String {
 		let grammar = try grammars.dropRandom().unwrap()
+		if unique {
+			history.append(grammar)
+		}
 		let sentences: [String] = try grammar.segments.map { segment in
 			switch segment {
 			case .entity(let entityKey):
@@ -14,7 +23,7 @@ public struct ParagraphGenerator {
 				return entity.name
 			case .text(let text):
 				return text
-			case .constraint:
+			case .constraint, .trait:
 				fatalError()
 			}
 		}

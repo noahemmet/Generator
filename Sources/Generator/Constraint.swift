@@ -1,6 +1,6 @@
 import Common
 
-public struct Constraint {
+public struct Constraint: Hashable {
 	public var wordKind: Word.Kind
 	public var tags: [Tag]
 

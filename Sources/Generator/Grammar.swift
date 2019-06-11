@@ -1,6 +1,6 @@
 import Common
 
-public struct Grammar {
+public struct Grammar: Hashable {
 	public var segments: [Segment]
 
 	public init(_ segments: [Segment]) {
@@ -10,7 +10,7 @@ public struct Grammar {
 	public var allConstraints: [Constraint] {
 		let constraints: [Constraint] = self.segments.compactMap { segment in
 			switch segment {
-			case .text, .entity: return nil
+			case .text, .entity, .trait: return nil
 			case .constraint(let constraint): return constraint
 			}
 		}
@@ -56,6 +56,10 @@ extension Grammar: ExpressibleByStringInterpolation {
 		
 		public mutating func appendInterpolation(e entityIndex: Int) {
 			segments.append(.entity("\(entityIndex)"))
+		}
+		
+		public mutating func appendInterpolation(e entityName: String, c constraint: Constraint) {
+			segments.append(.trait(entity: entityName, constraint))
 		}
 	}
 }
