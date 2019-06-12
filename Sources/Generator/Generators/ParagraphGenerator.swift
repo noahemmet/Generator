@@ -18,12 +18,15 @@ public struct ParagraphGenerator {
 		}
 		let sentences: [String] = try grammar.segments.map { segment in
 			switch segment {
+			case .text(let text):
+				return text
 			case .entity(let entityKey):
 				let entity = try self.entity(for: entityKey)
 				return entity.name
-			case .text(let text):
-				return text
-			case .constraint, .trait:
+			case .trait(let trait):
+				let entity = try self.entity(for: trait.entity)
+				return entity.name
+			case .constraint:
 				fatalError()
 			}
 		}

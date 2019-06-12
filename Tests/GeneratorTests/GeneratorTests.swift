@@ -2,6 +2,15 @@ import XCTest
 @testable import Generator
 
 final class GeneratorTests: XCTestCase {
+	struct MyEntity: GeneratedEntity {
+		var name: String
+		var tags: [Tag]
+	}
+	
+	struct MyArea: GeneratedEntity {
+		var name: String
+		var tags: [Tag]
+	}
 	
 	public let corpus = Corpus(
 		categories: [
@@ -33,15 +42,7 @@ final class GeneratorTests: XCTestCase {
 	
 	
 	func testEntityGenerator() throws {
-		struct MyEntity: GeneratedEntity {
-			var name: String
-			var tags: [Tag]
-		}
 		
-		struct MyArea: GeneratedEntity {
-			var name: String
-			var tags: [Tag]
-		}
 		
 		let entityGenerator = EntityGenerator<MyEntity>(corpus: corpus)
 		let entityGrammar: Grammar = "\(adj: "#body part")) \(n: "#sea creature")"
@@ -76,6 +77,13 @@ final class GeneratorTests: XCTestCase {
 		print("")
 	}
 	
+	func testSceneTemplates() throws {
+		let e1 = MyEntity(name: "rainbow-snouted pirk", tags: ["#rainbow, #snouted, #slippery, #sea creature"])
+		let e2 = MyEntity(name: "llama bat", tags: ["#flying, #winged"])
+		let intro: Grammar = ""
+		let area = MyArea(name: "moldy cave", tags: ["#moldy, #underground, #rocky"])
+		let template = SceneTemplate(intro: intro, area: area, entities: [e1, e2])
+	}
 	
 	static var allTests = [
 		("testGenerator", testGenerator),
