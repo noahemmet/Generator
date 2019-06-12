@@ -70,19 +70,22 @@ final class GeneratorTests: XCTestCase {
 			MyArea(name: "cave", tags: ["damp"]),
 			MyArea(name: "beach", tags: ["sunny"]),
 		] 
-		
-		let sceneGenerator = SceneGenerator(areaGrammars: areaGrammars, entityGrammars: entityGrammars, areas: areas, entities: entities)
-		let scene = try sceneGenerator.generate()
-		print(scene)
-		print("")
 	}
 	
 	func testSceneTemplates() throws {
-		let e1 = MyEntity(name: "rainbow-snouted pirk", tags: ["#rainbow, #snouted, #slippery, #sea creature"])
-		let e2 = MyEntity(name: "llama bat", tags: ["#flying, #winged"])
-		let intro: Grammar = ""
-		let area = MyArea(name: "moldy cave", tags: ["#moldy, #underground, #rocky"])
-		let template = SceneTemplate(intro: intro, area: area, entities: [e1, e2])
+//		let e1 = MyEntity(name: "rainbow-snouted pirk", tags: ["#rainbow, #snouted, #slippery, #sea creature"])
+//		let e2 = MyEntity(name: "llama bat", tags: ["#flying, #winged"])
+//		let intro: Grammar = ""
+//		let area = MyArea(name: "moldy cave", tags: ["#moldy, #underground, #rocky"])
+		let area: Grammar = "#material.wet #area.underground"
+		let e1: Grammar = "#colorful-#bodypart.ed #animal"
+		let e2: Grammar = "#slippery-#bodypart.ed #flying&animal"
+		let intro: Grammar = "You enter the @area. The @area.material squishes under your feet. A @1 is drinking from a nearby stream. You flinch as a "
+		let template = SceneTemplate(area: area, entities: [e1, e2], intro: intro)
+		let sceneGenerator = SceneGenerator(corpus: corpus)
+		let scene = try sceneGenerator.generate(from: template, unique: true)
+		print(scene)
+		XCTAssertTrue(scene.intro.hasPrefix("You enter the "))
 	}
 	
 	static var allTests = [

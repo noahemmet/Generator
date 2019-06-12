@@ -1,5 +1,6 @@
 import Common
 
+// Make this non-generic.
 public struct EntityGenerator<Entity: GeneratedEntity> {
 	public let corpus: Corpus
 
