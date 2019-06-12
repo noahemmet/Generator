@@ -12,11 +12,11 @@ public struct SceneGenerator {
 			}
 		}
 		
-		var areaGenerator = ParagraphGenerator(grammars: [template.area], entities: [])
-		let area = try areaGenerator.generate(unique: unique)
+		var areaResolver = GrammarResolver(grammars: [template.area], entities: [])
+		let area = try areaResolver.generate(unique: unique)
 		
-		var introGenerator = ParagraphGenerator(grammars: [template.intro], entities: entities)
-		let intro = try introGenerator.generate(unique: unique)
+		var introResolver = GrammarResolver(grammars: [template.intro], entities: entities)
+		let intro = try introResolver.generate(unique: unique)
 		
 		let scene = Scene(area: area, entities: entities, intro: intro)
 		return scene

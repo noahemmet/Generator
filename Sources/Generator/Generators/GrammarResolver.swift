@@ -1,6 +1,6 @@
 import Common
 
-public struct ParagraphGenerator {
+public struct GrammarResolver {
 	public var grammars: [Grammar]
 	public let entities: [GeneratedEntity]
 	private var history: [Grammar] = []
